@@ -9,12 +9,15 @@ export default async function handler(req, res) {
 
   try {
     const response = await axios.get('https://api.seats.aero/availability/search', {
-      params: { origin, destination, startDate, endDate }
+      params: { origin, destination, startDate, endDate },
+      headers: {
+        'User-Agent': 'SeatsAeroProxy/1.0 (yourdomain.com)'
+      }
     });
 
     res.status(200).json(response.data);
   } catch (error) {
-    console.error('Erro ao consultar a API da Seats.aero:', error.message);
+    console.error('Erro ao consultar Seats.aero:', error.message);
     res.status(500).json({ error: 'Erro na API da Seats.aero' });
   }
 }
