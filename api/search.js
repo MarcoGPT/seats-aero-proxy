@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 export default async function handler(req, res) {
   const { origin, destination, startDate, endDate } = req.query;
@@ -14,7 +14,7 @@ export default async function handler(req, res) {
 
     res.status(200).json(response.data);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Erro ao consultar a API da Seats.aero' });
+    console.error('Erro ao consultar a API da Seats.aero:', error.message);
+    res.status(500).json({ error: 'Erro na API da Seats.aero' });
   }
 }
